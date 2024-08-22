@@ -1,0 +1,14 @@
+services:
+  mariadb:
+    image: mariadb:10.6.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: taskbuddydb
+      MYSQL_USER: taskbuddyuser
+      MYSQL_PASSWORD: taskbuddy2024
+      TZ: "Asia/Seoul"
+    command: --character-set-server=utf8mb3 --collation-server=utf8mb3_unicode_ci
+    ports:
+      - "33306:3306"
+    volumes:
+      - ./db/init_db.sql:/docker-entrypoint-initdb.d/init_1.sql
