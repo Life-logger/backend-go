@@ -32,7 +32,7 @@ func (m kakaoImpl) GetAccessToken(authorizeCode string) string {
 	// Construct the data for the POST request
 	data := url.Values{}
 	data.Set("grant_type", "authorization_code")
-	data.Set("client_id", "e01c00f263b58f3ca766604298a63b8a")
+	data.Set("client_id", "047f9409d2369cfb8f5e8afa41b2d9eb")
 	data.Set("redirect_uri", "http://localhost:22250/callback")
 	data.Set("code", authorizeCode)
 
