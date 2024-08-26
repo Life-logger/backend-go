@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"taskbuddy.io/taskbuddy/controller"
-	"taskbuddy.io/taskbuddy/router"
+	"taskbuddy.io/taskbuddy/server/controller"
+	"taskbuddy.io/taskbuddy/server/router"
 )
 
 func main() {

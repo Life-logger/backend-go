@@ -9,7 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"taskbuddy.io/taskbuddy/router/groups"
+	"taskbuddy.io/taskbuddy/server/router/groups"
 )
 
 func Initialize(multiWriter io.Writer) *fiber.App {

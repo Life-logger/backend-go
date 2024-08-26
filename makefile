@@ -25,13 +25,13 @@ run:
 wire:
 ifeq ($(shell which wire),)
 	go install github.com/google/wire/cmd/wire@latest
-	cd di; \
+	cd server/di; \
 	wire
 else
-	cd di; \
+	cd server/di; \
 	wire
 endif
-	perl -0777 -i -pe 's/func\(\)\s*\{.*?cleanup\(\).*?\}\s*/cleanup\n/gs' di/wire_gen.go
+	perl -0777 -i -pe 's/func\(\)\s*\{.*?cleanup\(\).*?\}\s*/cleanup\n/gs' server/di/wire_gen.go
 
 ## mock: go mock generator
 mock:
@@ -69,12 +69,16 @@ m: wire mock
 restart: down up
 
 ## down: docker down
+down-server:
+	docker-compose -f docker-compose.yml down
 down:
-	docker-compose -f docker-compose-test.yml down
+	docker-compose -f docker-compose-all.yml down
 
 ## up: docker up
+up-server:
+	docker-compose -f docker-compose.yml up -d
 up:
-	docker-compose -f docker-compose-test.yml up -d
+	docker-compose -f docker-compose-db-swagger.yml up -d
 
 ## prune: docker prune
 .PHONY: prune

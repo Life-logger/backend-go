@@ -2,9 +2,9 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"taskbuddy.io/taskbuddy/di"
-	"taskbuddy.io/taskbuddy/domain/hello/dto"
-	"taskbuddy.io/taskbuddy/util/httpHelper"
+	"taskbuddy.io/taskbuddy/server/di"
+	"taskbuddy.io/taskbuddy/server/domain/hello/dto"
+	"taskbuddy.io/taskbuddy/server/util/httpHelper"
 )
 
 type HelloController struct{}

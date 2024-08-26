@@ -2,7 +2,7 @@ package groups
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"taskbuddy.io/taskbuddy/controller"
+	"taskbuddy.io/taskbuddy/server/controller"
 )
 
 func NewHelloGroup(f *fiber.App) {

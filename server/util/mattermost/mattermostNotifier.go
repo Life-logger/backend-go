@@ -1,8 +1,8 @@
 package mattermost
 
 import (
-	"taskbuddy.io/taskbuddy/util/clock"
-	"taskbuddy.io/taskbuddy/util/converter"
+	"taskbuddy.io/taskbuddy/server/util/clock"
+	"taskbuddy.io/taskbuddy/server/util/converter"
 
 	"fmt"
 	"net/http"

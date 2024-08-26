@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"taskbuddy.io/taskbuddy/util"
+	"taskbuddy.io/taskbuddy/server/util"
 )
 
 type LoginController struct{}

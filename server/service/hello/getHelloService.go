@@ -1,6 +1,6 @@
 package hello
 
-import "taskbuddy.io/taskbuddy/domain/hello/dto"
+import "taskbuddy.io/taskbuddy/server/domain/hello/dto"
 
 type (
 	GetHelloService interface {

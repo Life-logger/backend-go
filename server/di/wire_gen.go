@@ -12,10 +12,10 @@ import (
 	"fmt"
 	"github.com/google/wire"
 	"runtime/debug"
-	"taskbuddy.io/taskbuddy/config"
-	"taskbuddy.io/taskbuddy/config/domainEvent"
-	"taskbuddy.io/taskbuddy/service/hello"
-	"taskbuddy.io/taskbuddy/util/mattermost"
+	"taskbuddy.io/taskbuddy/server/config"
+	"taskbuddy.io/taskbuddy/server/config/domainEvent"
+	"taskbuddy.io/taskbuddy/server/service/hello"
+	"taskbuddy.io/taskbuddy/server/util/mattermost"
 )
 
 // Injectors from di.go:
