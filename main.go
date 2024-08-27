@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"taskbuddy.io/taskbuddy/server/controller"
 	"taskbuddy.io/taskbuddy/server/router"
 )
 
@@ -23,8 +22,6 @@ func main() {
 
 	app := router.Initialize(multiWriter)
 
-	loginController := controller.LoginController{}
-	app.Get("/callback", loginController.Login)
 	// Start the server on port 3000
 
 	log.Fatal(app.Listen(":22250"))

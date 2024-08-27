@@ -46,6 +46,7 @@ func Initialize(multiWriter io.Writer) *fiber.App {
 	})
 
 	groups.NewHelloGroup(f)
+	groups.NewLoginGroup(f)
 
 	return f
 }
