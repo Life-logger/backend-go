@@ -10,7 +10,61 @@ CREATE TABLE ADMIN (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO ADMIN (email,passcode,admin_type,brand_id) VALUES
-('annie.chang@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','SUPER',NULL),
-('tom.cruise@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','BRAND',2),
-('brad.pitt@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','BRAND',1),
-('ob_manager@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','BRAND',3);
+('ahnnn000@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','SUPER',NULL);
+
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY, --SERIAL: 자동으로 증가하는 정수 타입
+    --password_hash VARCHAR(255) NOT NULL,
+    user_name VARCHAR(10) NOT NULL,
+    --preferences JSONB
+);
+
+CREATE TABLE Categories (
+    categories_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    color VARCHAR(7),
+    --start_time TIMESTAMP NOT NULL,
+    --end_time TIMESTAMP NOT NULL,
+    categories_title VARCHAR(20) NOT NULL,
+);
+
+CREATE TABLE Blocks (
+    block_id SERIAL PRIMARY KEY,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    color VARCHAR(7) REFERENCES Categories(color),
+    background_image_url TEXT,
+    block_memo TEXT,
+    background_image_url TEXT, -- 대표 이미지 URL
+    block_pin BOOLEAN NOT NULL,
+);
+
+
+CREATE TABLE CategoriesBlocks (
+    categories_id INT REFERENCES categories(categories_id),
+    block_id INT REFERENCES Blocks(block_id),
+    PRIMARY KEY(categories_id, block_id)
+);
+
+/* CREATE TABLE Tags (
+    tag_id SERIAL PRIMARY KEY,
+    tag_name VARCHAR(100) UNIQUE NOT NULL
+);--? */
+
+/* CREATE TABLE CategoriesTags (
+    categories_id INT REFERENCES categories(categories_id),
+    tag_id INT REFERENCES Tags(tag_id),
+    PRIMARY KEY(categories_id, tag_id)
+); */
+
+CREATE TABLE Calendar (
+    date DATE PRIMARY KEY,
+    representative_block_id INT REFERENCES Blocks(block_id),
+    title VARCHAR(255)
+);
+
+CREATE TABLE CalendarBlocks (
+    date DATE REFERENCES Calendar(date),
+    block_id INT REFERENCES Blocks(block_id),
+    PRIMARY KEY(date, block_id)
+);
