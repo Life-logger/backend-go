@@ -12,7 +12,7 @@ COPY go.mod .
 COPY go.sum .
 
 RUN go mod vendor
-RUN go build -mod=vendor -o ./build/server taskbuddy.io/taskbuddy/server
+RUN go build -mod=vendor -o ./build/server lifelogger/server
 
 # Build a small image
 FROM alpine:3.14

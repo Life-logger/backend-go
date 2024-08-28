@@ -11,11 +11,11 @@ import (
 
 	"github.com/google/wire"
 
-	helloService "taskbuddy.io/taskbuddy/service/hello"
+	helloService "lifelogger/service/hello"
 
-	"taskbuddy.io/taskbuddy/config"
-	"taskbuddy.io/taskbuddy/config/domainEvent"
-	"taskbuddy.io/taskbuddy/util/mattermost"
+	"lifelogger/config"
+	"lifelogger/config/domainEvent"
+	"lifelogger/util/mattermost"
 )
 
 var (

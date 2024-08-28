@@ -1,10 +1,11 @@
 package controller
 
 import (
+	"lifelogger/server/di"
+	"lifelogger/server/domain/hello/dto"
+	"lifelogger/server/util/httpHelper"
+
 	"github.com/gofiber/fiber/v2"
-	"taskbuddy.io/taskbuddy/server/di"
-	"taskbuddy.io/taskbuddy/server/domain/hello/dto"
-	"taskbuddy.io/taskbuddy/server/util/httpHelper"
 )
 
 type HelloController struct{}
