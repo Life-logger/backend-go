@@ -14,6 +14,7 @@ import (
 type TokenGetter interface {
 	GetAccessToken(authorizeCode string) (string, string)
 	RefreshAccessToken(refreshToken string) string
+	GetUserInfo(accessToken string) (string, error)
 }
 
 // kakaoImpl is a struct that implements the CertificationsGetter interface for Kakao.
@@ -34,7 +35,7 @@ func (m kakaoImpl) GetAccessToken(authorizeCode string) (string, string) {
 	data := url.Values{}
 	data.Set("grant_type", "authorization_code")
 	data.Set("client_id", "047f9409d2369cfb8f5e8afa41b2d9eb")
-	data.Set("redirect_uri", "http://localhost:22250/callback")
+	data.Set("redirect_uri", "http://localhost:22250/login/callback")
 	data.Set("code", authorizeCode)
 
 	// Create a POST request
@@ -129,4 +130,47 @@ func (m kakaoImpl) RefreshAccessToken(refreshToken string) string {
 	}
 
 	return newAccessToken
+}
+
+func (m kakaoImpl) GetUserInfo(accessToken string) (string, error) {
+	kakaotalkUserInfoURL := "https://kapi.kakao.com/v2/user/me"
+
+	req, err := http.NewRequest(http.MethodGet, kakaotalkUserInfoURL, nil)
+	if err != nil {
+		return "", fmt.Errorf("client: could not create request: %v", err)
+	}
+
+	req.Header.Set("Authorization", "Bearer "+accessToken)
+
+	client := &http.Client{Timeout: 10 * time.Second}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("client: error making http request: %v", err)
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		return "", fmt.Errorf("client: received non-OK HTTP status: %s", res.Status)
+	}
+
+	// Read the response body
+	resBody, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", fmt.Errorf("client: error reading http response body: %v", err)
+	}
+
+	// Parse the JSON response to extract the nickname
+	var result map[string]interface{}
+	err = json.Unmarshal(resBody, &result)
+	if err != nil {
+		return "", fmt.Errorf("client: error unmarshalling response body: %v", err)
+	}
+
+	// Access the nickname from the response
+	nickname, ok := result["kakao_account"].(map[string]interface{})["profile"].(map[string]interface{})["nickname"].(string)
+	if !ok {
+		return "", fmt.Errorf("client: nickname not found in response")
+	}
+
+	return nickname, nil
 }
