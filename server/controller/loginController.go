@@ -9,17 +9,17 @@ import (
 type LoginController struct{}
 
 func (a *LoginController) Login(c *fiber.Ctx) error {
-	code := c.Query("code")
+	code := c.Query("code") // 인가 코드
 	tokenGetter := util.NewTokenGetter()
 	accessToken, refreshToken := tokenGetter.GetAccessToken(code)
-	c.Cookie(cookies.MakeCookies("accessToken", accessToken))
-	return c.SendString(refreshToken)
+	c.Cookie(cookies.MakeCookies("accessToken", accessToken)) // 쿠키에 저장
+	return c.SendString(refreshToken)                         // 프론트에 보냄
 }
 
 func (a *LoginController) RefreshToken(c *fiber.Ctx) error {
 	refreshToken := c.Query("refreshToken")
 	tokenGetter := util.NewTokenGetter()
-	newAccessToken := tokenGetter.RefreshAccessToken(refreshToken)
+	newAccessToken := tokenGetter.GetNewAccessToken(refreshToken)
 	c.Cookie(cookies.MakeCookies("accessToken", newAccessToken))
 	return c.SendStatus(200)
 }

@@ -13,7 +13,7 @@ import (
 // CertificationsGetter defines the interface for obtaining OAuth tokens.
 type TokenGetter interface {
 	GetAccessToken(authorizeCode string) (string, string)
-	RefreshAccessToken(refreshToken string) string
+	GetNewAccessToken(refreshToken string) string
 }
 
 // kakaoImpl is a struct that implements the CertificationsGetter interface for Kakao.
@@ -34,7 +34,7 @@ func (m kakaoImpl) GetAccessToken(authorizeCode string) (string, string) {
 	data := url.Values{}
 	data.Set("grant_type", "authorization_code")
 	data.Set("client_id", "047f9409d2369cfb8f5e8afa41b2d9eb")
-	data.Set("redirect_uri", "http://localhost:22250/callback")
+	data.Set("redirect_uri", "http://localhost:22250/login/callback")
 	data.Set("code", authorizeCode)
 
 	// Create a POST request
@@ -82,7 +82,7 @@ func (m kakaoImpl) GetAccessToken(authorizeCode string) (string, string) {
 	return accessToken, refreshToken
 }
 
-func (m kakaoImpl) RefreshAccessToken(refreshToken string) string {
+func (m kakaoImpl) GetNewAccessToken(refreshToken string) string {
 	kakaotalk_url := "https://kauth.kakao.com/oauth/token"
 
 	// Construct the data for the POST request
