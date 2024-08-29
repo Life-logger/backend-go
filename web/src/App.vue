@@ -1,22 +1,20 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import Home from './pages/Home.vue'
+import {RouterView} from 'vue-router'
+export default{
+  name: "App",
+  components: {
+    RouterView,
+    Home,
+  }
+}
 </script>
 
 <template>
-  <HelloWorld msg="TaskBuddy using Vite + Vue" />
+  <div id="app">
+    <h1>App</h1>
+    <!-- <div v-if="isMobile"> -->
+    <RouterView />
+    <!-- </div> -->
+  </div>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
