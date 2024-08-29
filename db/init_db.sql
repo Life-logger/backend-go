@@ -26,6 +26,7 @@ CREATE TABLE Categories (
     --start_time TIMESTAMP NOT NULL,
     --end_time TIMESTAMP NOT NULL,
     categories_title VARCHAR(20) NOT NULL,
+    categories_total_time INT NOT NULL DEFAULT 0,
 );
 
 CREATE TABLE Blocks (
