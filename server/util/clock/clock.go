@@ -14,7 +14,7 @@ var Now = func() time.Time {
 	return time.Now()
 }
 
-var ParseDatetime = func(datetime string) time.Time {
+var ParseDatetime = func(datetime string) time.Time { // 문자열로 주어진 시간을 time.Time(시간 형식)으로 변환
 	t, err := time.Parse(time.RFC3339, datetime)
 	if err != nil {
 		return time.Time{}
@@ -23,7 +23,7 @@ var ParseDatetime = func(datetime string) time.Time {
 	return t.In(time.Now().Location())
 }
 
-var Format = func(t time.Time) string {
+var Format = func(t time.Time) string { // time.Time(시간)을 문자열로 변환
 	emptyTimeString := "0001-01-01T00:00:00Z"
 	result := t.Format(time.RFC3339)
 	if result == emptyTimeString {
