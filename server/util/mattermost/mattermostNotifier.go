@@ -1,8 +1,8 @@
 package mattermost
 
 import (
-	"taskbuddy.io/taskbuddy/server/util/clock"
-	"taskbuddy.io/taskbuddy/server/util/converter"
+	"lifelogger/server/util/clock"
+	"lifelogger/server/util/converter"
 
 	"fmt"
 	"net/http"

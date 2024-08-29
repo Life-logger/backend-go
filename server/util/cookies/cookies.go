@@ -8,6 +8,7 @@ import (
 
 func MakeCookies(key, value string) *fiber.Cookie {
 	cookie := new(fiber.Cookie)
+	cookie.Path = "/"
 	cookie.Name = key
 	cookie.Value = value
 	cookie.Expires = time.Now().Add(time.Hour * 24)

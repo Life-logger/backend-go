@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OAuth Authorization</title>
+    <title>Main Page</title>
 </head>
 <body>
-    <img src="src/img/kakaoLoginBtn.png" id="authorizeBtn">
-   
-    <script>
-        const REST_API_KEY = '047f9409d2369cfb8f5e8afa41b2d9eb';
-        const REDIRECT_URI = 'http://localhost:22250/login/callback';
-
-        document.getElementById('authorizeBtn').addEventListener('click', function() {
-            const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
-            window.location.href = url;
-        });
-    </script>
+    <h1>Welcome to the Main Page!</h1>
+    <p>You are logged in.</p>
+    <a href="/login">Logout</a>
 </body>
 </html>

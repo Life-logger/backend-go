@@ -6,10 +6,12 @@ import (
 	"runtime/debug"
 	"time"
 
+	"lifelogger/middleware"
+	"lifelogger/server/router/groups"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"taskbuddy.io/taskbuddy/server/router/groups"
 )
 
 func Initialize(multiWriter io.Writer) *fiber.App {
@@ -44,9 +46,12 @@ func Initialize(multiWriter io.Writer) *fiber.App {
 		}()
 		return c.Next()
 	})
+	f.Use(middleware.AuthMiddleware)
 
+	// f.Static("/", "./web")
 	groups.NewHelloGroup(f)
 	groups.NewLoginGroup(f)
+	groups.NewHomeGroup(f)
 
 	return f
 }

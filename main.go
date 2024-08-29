@@ -5,8 +5,9 @@ import (
 	"log"
 	"os"
 
+	"lifelogger/server/router"
+
 	"github.com/joho/godotenv"
-	"taskbuddy.io/taskbuddy/server/router"
 )
 
 func main() {
