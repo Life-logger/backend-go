@@ -1,8 +1,8 @@
 package mattermost
 
 import (
-	"lifelogger/server/util/blocks"
 	"lifelogger/server/util/converter"
+	"lifelogger/server/util/models/blocks"
 
 	"fmt"
 	"net/http"
