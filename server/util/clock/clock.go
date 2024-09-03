@@ -2,10 +2,24 @@ package clock
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 )
+
+var db *sqlx.DB
+
+func init() {
+	var err error
+	db, err = sqlx.Open("mysql", "user:password@/dbname")
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
 
 const DateTimeFormat = "2006-01-02 15:04:05"
 const startingDate = "2024-01-01T00:00:00+09:00"
@@ -59,12 +73,23 @@ var ParseDuration = func(durationStr string) (years, months, days int, err error
 
 // 스톱워치
 
-// Struct to hold the stopwatch data
-type Stopwatch struct {
-	StartTime time.Time
-	EndTime   time.Time
-	Duration  time.Duration
+type Blocks struct {
+	BlockID            int           `db:"block_id"`
+	StartTime          time.Time     `db:"start_time"`
+	EndTime            time.Time     `db:"end_time"`
+	Duration           time.Duration `db:"duration"`
+	Color              string        `db:"color"`
+	BackgroundImageURL string        `db:"background_image_url"`
+	BlockMemo          string        `db:"block_memo"`
+	BlockPin           bool          `db:"block_pin"`
 }
+
+// Struct to hold the stopwatch duration data
+// type Stopwatch struct {
+// 	// StartTime Blocks.StartTime
+// 	// EndTime   time.Time
+// 	Duration time.Duration
+// }
 
 // Start the stopwatch and return the start time
 var StartStopwatch = func() time.Time {
@@ -78,11 +103,25 @@ var StopStopwatch = func(startTime time.Time) (endTime time.Time, duration time.
 	return endTime, duration
 }
 
+// 스톱워치 데이터 Blocks DB에 저장
 // Function to save stopwatch data to DB (Stub function - replace with actual DB logic)
-var SaveStopwatchData = func(stopwatch Stopwatch) error {
+var SaveStopwatchData = func(blocks Blocks) error {
 	// Implement your DB saving logic here
+	if db == nil {
+		return fmt.Errorf("DB connection is not initialized")
+	}
+
+	query := `
+        INSERT INTO Blocks (start_time, end_time, color, background_image_url, block_memo, block_pin) 
+        VALUES (?, ?, ?, ?, ?, ?)
+    `
+
+	_, err := db.Exec(query, blocks.StartTime, blocks.EndTime, blocks.Color, blocks.BackgroundImageURL, blocks.BlockMemo, blocks.BlockPin)
+	if err != nil {
+		return fmt.Errorf("데이터 삽입 실패: %v", err)
+	}
 	// For now, just print to console (for example purposes)
-	fmt.Printf("Saving to DB: StartTime: %s, EndTime: %s, Duration: %s\n", Format(stopwatch.StartTime), Format(stopwatch.EndTime), stopwatch.Duration)
+	fmt.Printf("Saving to DB: StartTime: %s, EndTime: %s, Duration: %s\n", Format(blocks.StartTime), Format(blocks.EndTime), blocks.Duration)
 	return nil
 }
 
@@ -98,10 +137,14 @@ func ExampleStopwatchUsage() {
 	endTime, duration := StopStopwatch(startTime)
 
 	// Create the stopwatch data
-	stopwatch := Stopwatch{
-		StartTime: startTime,
-		EndTime:   endTime,
-		Duration:  duration,
+	stopwatch := Blocks{
+		StartTime:          startTime,
+		EndTime:            endTime,
+		Duration:           duration,
+		Color:              "#FFF",
+		BackgroundImageURL: "",
+		BlockMemo:          "",
+		BlockPin:           false,
 	}
 
 	// Save the stopwatch data to DB
@@ -112,7 +155,7 @@ func ExampleStopwatchUsage() {
 }
 
 // Function to reset the stopwatch and save the record
-var ResetAndSaveStopwatchAtMidnight = func(stopwatch *Stopwatch) {
+var ResetAndSaveStopwatchAtMidnight = func(stopwatch *Blocks) {
 	for {
 		now := Now()
 		// Calculate time until next midnight
