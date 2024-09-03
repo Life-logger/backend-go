@@ -41,11 +41,11 @@ CREATE TABLE Blocks (
 );
 
 
-CREATE TABLE CategoriesBlocks (
-    categories_id INT REFERENCES categories(categories_id),
-    block_id INT REFERENCES Blocks(block_id),
-    PRIMARY KEY(categories_id, block_id)
-);
+-- CREATE TABLE CategoriesBlocks (
+--     categories_id INT REFERENCES categories(categories_id),
+--     block_id INT REFERENCES Blocks(block_id),
+--     PRIMARY KEY(categories_id, block_id)
+-- );
 
 /* CREATE TABLE Tags (
     tag_id SERIAL PRIMARY KEY,
@@ -63,8 +63,8 @@ CREATE TABLE Calendar (
     representative_block_id INT REFERENCES Blocks(block_id),
 );
 
-CREATE TABLE CalendarBlocks (
-    date DATE REFERENCES Calendar(date),
-    block_id INT REFERENCES Blocks(block_id),
-    PRIMARY KEY(date, block_id)
-);
+-- CREATE TABLE CalendarBlocks (
+--     date DATE REFERENCES Calendar(date),
+--     block_id INT REFERENCES Blocks(block_id),
+--     PRIMARY KEY(date, block_id)
+-- );

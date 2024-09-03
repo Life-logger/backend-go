@@ -1,7 +1,7 @@
 package mattermost
 
 import (
-	"lifelogger/server/util/clock"
+	"lifelogger/server/util/blocks"
 	"lifelogger/server/util/converter"
 
 	"fmt"
@@ -15,7 +15,7 @@ var Noti = func(title, text string) {
 			"title":  title,
 			"text":   text,
 			"color":  "#ff5d52",
-			"footer": clock.Now().Format(clock.DateTimeFormat),
+			"footer": blocks.Now().Format(blocks.DateTimeFormat),
 		},
 	}
 	props := map[string]interface{}{
