@@ -1,8 +1,10 @@
 package groups
 
 import (
+	// "lifelogger/server/controller"
+	"lifelogger/server/controller"
+
 	"github.com/gofiber/fiber/v2"
-	"taskbuddy.io/taskbuddy/server/controller"
 )
 
 func NewLoginGroup(f *fiber.App) {

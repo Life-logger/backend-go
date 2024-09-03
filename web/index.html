@@ -1,21 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OAuth Authorization</title>
-</head>
-<body>
-    <img src="src/img/kakaoLoginBtn.png" id="authorizeBtn">
-   
-    <script>
-        const REST_API_KEY = '047f9409d2369cfb8f5e8afa41b2d9eb';
-        const REDIRECT_URI = 'http://localhost:22250/callback';
-
-        document.getElementById('authorizeBtn').addEventListener('click', function() {
-            const url = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
-            window.location.href = url;
-        });
-    </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue</title>
+    <!-- <script type="module" crossorigin src="/assets/index-D-PHF8SF.js"></script> -->
+    <!-- <link rel="stylesheet" crossorigin href="/assets/index-C2DRrVQD.css"> -->
+    <script type="module" src="/src/main.js" defer></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>

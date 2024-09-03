@@ -1,4 +1,4 @@
-module taskbuddy.io/taskbuddy
+module lifelogger
 
 go 1.22.5
 

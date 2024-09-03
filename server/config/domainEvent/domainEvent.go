@@ -1,7 +1,7 @@
 package domainEvent
 
 import (
-	"taskbuddy.io/taskbuddy/server/util/mattermost"
+	"lifelogger/server/util/mattermost"
 
 	"context"
 	"errors"
