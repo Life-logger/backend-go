@@ -33,19 +33,19 @@ CREATE TABLE Blocks (
     block_id SERIAL PRIMARY KEY,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    color VARCHAR(7) REFERENCES Categories(color),
+    duration time.Duration NOT NULL,
+    color VARCHAR(7) REFERENCES Categories(categories_id) ON DELETE CASCADE ON UPDATE NO ACTION,
     background_image_url TEXT,
     block_memo TEXT,
-    background_image_url TEXT, -- 대표 이미지 URL
     block_pin BOOLEAN NOT NULL,
 );
 
 
-CREATE TABLE CategoriesBlocks (
-    categories_id INT REFERENCES categories(categories_id),
-    block_id INT REFERENCES Blocks(block_id),
-    PRIMARY KEY(categories_id, block_id)
-);
+-- CREATE TABLE CategoriesBlocks (
+--     categories_id INT REFERENCES categories(categories_id),
+--     block_id INT REFERENCES Blocks(block_id),
+--     PRIMARY KEY(categories_id, block_id)
+-- );
 
 /* CREATE TABLE Tags (
     tag_id SERIAL PRIMARY KEY,
@@ -61,11 +61,10 @@ CREATE TABLE CategoriesBlocks (
 CREATE TABLE Calendar (
     date DATE PRIMARY KEY,
     representative_block_id INT REFERENCES Blocks(block_id),
-    title VARCHAR(255)
 );
 
-CREATE TABLE CalendarBlocks (
-    date DATE REFERENCES Calendar(date),
-    block_id INT REFERENCES Blocks(block_id),
-    PRIMARY KEY(date, block_id)
-);
+-- CREATE TABLE CalendarBlocks (
+--     date DATE REFERENCES Calendar(date),
+--     block_id INT REFERENCES Blocks(block_id),
+--     PRIMARY KEY(date, block_id)
+-- );

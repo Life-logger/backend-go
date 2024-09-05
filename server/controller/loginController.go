@@ -10,7 +10,7 @@ import (
 type LoginController struct{}
 
 func (a *LoginController) Login(c *fiber.Ctx) error {
-	code := c.Query("code")
+	code := c.Query("code") // 인가 코드
 	tokenGetter := util.NewTokenGetter()
 	accessToken, refreshToken := tokenGetter.GetAccessToken(code) // Access Token, Refresh Token 가져오기
 	nickname, email, err := tokenGetter.GetUserInfo(accessToken)  // Nickname 가져오기
