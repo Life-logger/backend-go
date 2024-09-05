@@ -69,7 +69,6 @@ func UpdateRepresentativeBlock(c *fiber.Ctx) error { // 특정 날짜의 대표 
 			"error": "Invalid input",
 		})
 	}
-
 	query := `
         UPDATE Calendar 
         SET representative_block_id = ? 
@@ -85,4 +84,6 @@ func UpdateRepresentativeBlock(c *fiber.Ctx) error { // 특정 날짜의 대표 
 	return c.JSON(fiber.Map{
 		"message": "updated successfully",
 	})
+
+	// test
 }
