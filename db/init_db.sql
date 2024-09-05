@@ -21,12 +21,11 @@ CREATE TABLE Users (
 
 CREATE TABLE Categories (
     categories_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES Users(user_id),
+    user_email VARCHAR(20) REFERENCES Users(user_id),
     color VARCHAR(7),
     --start_time TIMESTAMP NOT NULL,
     --end_time TIMESTAMP NOT NULL,
-    categories_title VARCHAR(20) NOT NULL,
-    categories_total_time INT NOT NULL DEFAULT 0,
+    title VARCHAR(20) NOT NULL,
 );
 
 CREATE TABLE Blocks (

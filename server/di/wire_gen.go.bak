@@ -33,7 +33,9 @@ func InjectCreateCategoryService() (categories.CreateCategoryService, func()) {
 	tx, cleanup := provideTx(context, conn)
 	categoriesRepository := categories2.NewCategoriesRepository(conn, tx, context)
 	createCategoryService := categories.NewCreateCategoryService(categoriesRepository)
-	return createCategoryService, cleanup
+	return createCategoryService, func() {
+		cleanup()
+	}
 }
 
 // di.go:
