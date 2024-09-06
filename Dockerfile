@@ -8,6 +8,7 @@ ENV GO111MODULE=on \
 WORKDIR /app
 
 COPY ./server ./server
+COPY ./middleware ./middleware
 COPY go.mod .
 COPY go.sum .
 
@@ -28,3 +29,4 @@ COPY .env .
 EXPOSE 22250
 
 ENTRYPOINT ["/bin/sh", "-c" , "./build/server"]
+
