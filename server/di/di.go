@@ -11,11 +11,14 @@ import (
 
 	"github.com/google/wire"
 
-	helloService "lifelogger/service/hello"
+	helloService "lifelogger/server/service/hello"
 
-	"lifelogger/config"
-	"lifelogger/config/domainEvent"
-	"lifelogger/util/mattermost"
+	categoriesModel "lifelogger/server/domain/categories/model"
+	categoryService "lifelogger/server/service/categories"
+
+	"lifelogger/server/config"
+	"lifelogger/server/config/domainEvent"
+	"lifelogger/server/util/mattermost"
 )
 
 var (
@@ -93,4 +96,12 @@ func InjectGetHelloService() helloService.GetHelloService {
 		helloService.NewGetHelloService,
 	)
 	return nil
+}
+
+func InjectCreateCategoryService() (categoryService.CreateCategoryService, func()) {
+	panic(wire.Build(
+		superSet,
+		categoriesModel.NewCategoriesRepository,
+		categoryService.NewCreateCategoryService,
+	))
 }

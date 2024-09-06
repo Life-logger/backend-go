@@ -11,11 +11,13 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/google/wire"
-	"runtime/debug"
 	"lifelogger/server/config"
 	"lifelogger/server/config/domainEvent"
+	categories2 "lifelogger/server/domain/categories/model"
+	"lifelogger/server/service/categories"
 	"lifelogger/server/service/hello"
 	"lifelogger/server/util/mattermost"
+	"runtime/debug"
 )
 
 // Injectors from di.go:
@@ -23,6 +25,15 @@ import (
 func InjectGetHelloService() hello.GetHelloService {
 	getHelloService := hello.NewGetHelloService()
 	return getHelloService
+}
+
+func InjectCreateCategoryService() (categories.CreateCategoryService, func()) {
+	context := provideCtx()
+	conn := provideConn(context)
+	tx, cleanup := provideTx(context, conn)
+	categoriesRepository := categories2.NewCategoriesRepository(conn, tx, context)
+	createCategoryService := categories.NewCreateCategoryService(categoriesRepository)
+	return createCategoryService, cleanup
 }
 
 // di.go:
