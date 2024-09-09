@@ -22,48 +22,25 @@ CREATE TABLE ADMIN (
 
 CREATE TABLE Categories (
     id INT NOT NULL AUTO_INCREMENT,
-    user_email VARCHAR(20),
+    user_email VARCHAR(40),
     color VARCHAR(7),
     title VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- CREATE TABLE Blocks (
---     block_id SERIAL PRIMARY KEY,
---     start_time TIMESTAMP NOT NULL,
---     end_time TIMESTAMP NOT NULL,
---     duration time.Duration NOT NULL,
---     color VARCHAR(7) REFERENCES Categories(categories_id) ON DELETE CASCADE ON UPDATE NO ACTION,
---     background_image_url TEXT,
---     block_memo TEXT,
---     block_pin BOOLEAN NOT NULL
--- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
-
--- -- CREATE TABLE CategoriesBlocks (
--- --     categories_id INT REFERENCES categories(categories_id),
--- --     block_id INT REFERENCES Blocks(block_id),
--- --     PRIMARY KEY(categories_id, block_id)
--- -- );
-
--- /* CREATE TABLE Tags (
---     tag_id SERIAL PRIMARY KEY,
---     tag_name VARCHAR(100) UNIQUE NOT NULL
--- );--? */
-
--- /* CREATE TABLE CategoriesTags (
---     categories_id INT REFERENCES categories(categories_id),
---     tag_id INT REFERENCES Tags(tag_id),
---     PRIMARY KEY(categories_id, tag_id)
--- ); */
+CREATE TABLE Blocks (
+    block_id INT AUTO_INCREMENT,
+    start_time INT NOT NULL,
+    end_time INT NOT NULL,
+    duration INT NOT NULL,
+    color VARCHAR(7) REFERENCES Categories(categories_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    background_image_url VARCHAR(255),
+    block_memo VARCHAR(255),
+    block_pin BOOLEAN NOT NULL,
+    PRIMARY KEY (block_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- CREATE TABLE Calendar (
 --     date DATE PRIMARY KEY,
 --     representative_block_id INT REFERENCES Blocks(block_id)
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- -- CREATE TABLE CalendarBlocks (
--- --     date DATE REFERENCES Calendar(date),
--- --     block_id INT REFERENCES Blocks(block_id),
--- --     PRIMARY KEY(date, block_id)
--- -- );
