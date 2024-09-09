@@ -16,8 +16,8 @@ CREATE TABLE ADMIN (
     UNIQUE KEY ADMIN_unique (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
--- -- INSERT INTO ADMIN (email,passcode,admin_type,brand_id) VALUES
--- -- ('ahnnn000@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','SUPER',NULL);
+-- INSERT INTO ADMIN (email,passcode,admin_type,brand_id) VALUES
+-- ('ahnnn000@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','SUPER',NULL);
 
 
 CREATE TABLE Categories (
