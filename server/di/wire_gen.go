@@ -15,6 +15,8 @@ import (
 	"lifelogger/server/config/domainEvent"
 	categories2 "lifelogger/server/domain/categories/model"
 	"lifelogger/server/service/categories"
+	blocks2 "lifelogger/server/domain/blocks/model"
+	"lifelogger/server/service/blocks"
 	"lifelogger/server/service/hello"
 	"lifelogger/server/util/mattermost"
 	"runtime/debug"
@@ -33,6 +35,15 @@ func InjectCreateCategoryService() (categories.CreateCategoryService, func()) {
 	tx, cleanup := provideTx(context, conn)
 	categoriesRepository := categories2.NewCategoriesRepository(conn, tx, context)
 	createCategoryService := categories.NewCreateCategoryService(categoriesRepository)
+	return createCategoryService, cleanup
+}
+
+func InjectCreateBlockService() (blocks.CreateBlockService, func()) {
+	context := provideCtx()
+	conn := provideConn(context)
+	tx, cleanup := provideTx(context, conn)
+	blocksRepository := blocks2.NewBlocksRepository(conn, tx, context)
+	createCategoryService := blocks.NewCreateBlockService(blocksRepository)
 	return createCategoryService, cleanup
 }
 

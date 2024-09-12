@@ -105,3 +105,11 @@ func InjectCreateCategoryService() (categoryService.CreateCategoryService, func(
 		categoryService.NewCreateCategoryService,
 	))
 }
+
+func InjectCreateBlockService() (blockService.CreateBlockService, func()) {
+	panic(wire.Build(
+		superSet,
+		categoriesModel.NewCategoriesRepository,
+		categoryService.NewCreateCategoryService,
+	))
+}
