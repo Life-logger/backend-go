@@ -1,7 +1,7 @@
 package mattermost
 
 import (
-	"lifelogger/server/domain/blocks"
+	"lifelogger/server/service/blocks"
 	"lifelogger/server/util/converter"
 
 	"fmt"
