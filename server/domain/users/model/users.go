@@ -16,6 +16,7 @@ type userImpl struct {
 	userName  string
 }
 
+// 새로운 사용자를 생성
 func NewUser(userId int, userEmail string, userName string) User {
 	i := new(userImpl)
 	i.userId = userId

@@ -14,6 +14,9 @@ import (
 	"lifelogger/server/config"
 	"lifelogger/server/config/domainEvent"
 	categories2 "lifelogger/server/domain/categories/model"
+	users2 "lifelogger/server/domain/users/model"
+
+	"lifelogger/server/service/users"
 	"lifelogger/server/service/categories"
 	"lifelogger/server/service/hello"
 	"lifelogger/server/util/mattermost"
@@ -35,6 +38,16 @@ func InjectCreateCategoryService() (categories.CreateCategoryService, func()) {
 	createCategoryService := categories.NewCreateCategoryService(categoriesRepository)
 	return createCategoryService, cleanup
 }
+
+func InjectCreateUserService() (users.CreateUserService, func()) {
+	context := provideCtx()
+	conn := provideConn(context)
+	tx, cleanup := provideTx(context, conn)
+	usersRepository := users2.NewUsersRepository(conn, tx, context)
+	createUserService := users.NewCreateUserService(usersRepository)
+	return createUserService, cleanup
+}
+
 
 // di.go:
 

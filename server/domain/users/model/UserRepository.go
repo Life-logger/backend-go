@@ -29,6 +29,7 @@ func NewUsersRepository(
 	return i
 }
 
+// 사용자 정보를 DB에 INSERT
 func (s usersRepositoryImpl) Save(user User) {
 	sqlStatement := `INSERT INTO Users (user_id, user_name) VALUES (?, ?)`
 
