@@ -45,13 +45,17 @@ func Initialize(multiWriter io.Writer) *fiber.App {
 		}()
 		return c.Next()
 	})
+
 	groups.NewLoginGroup(f)
 
 	// 미들웨어를 추가
 	f.Use(middleware.AuthMiddleware())
 
-	// 라우트 그룹 설정+-
+	// 라우트 그룹 설정
 	groups.NewHomeGroup(f)
+	groups.NewBlockGroup(f)
+	groups.NewCategoryGroup(f)
+	groups.NewUserGroup(f)
 
 	return f
 }

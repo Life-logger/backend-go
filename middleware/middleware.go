@@ -22,7 +22,7 @@ func AuthMiddleware() fiber.Handler {
 		_, _, err := tokenGetter.GetUserInfo(accessToken)
 		if err != nil {
 			// 액세스 토큰이 유효하지 않으면 로그인 페이지로 리다이렉트
-			return c.SendStatus(404)
+			return c.Redirect("/login")
 		}
 
 		return c.Next()

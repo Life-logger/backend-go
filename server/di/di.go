@@ -113,3 +113,11 @@ func InjectCreateBlockService() (blockService.CreateBlockService, func()) {
 		categoryService.NewCreateCategoryService,
 	))
 }
+
+func InjectCreateCalendarService() (calendarService.CreateCalendarService, func()) {
+	panic(wire.Build(
+		superSet,
+		calendarModel.NewCalendarRepository,
+		calendarService.NewCreateCalendarService,
+	))
+}

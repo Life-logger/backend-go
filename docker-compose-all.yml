@@ -14,4 +14,21 @@ services:
     #  - ./db/mysql:/var/lib/mysql/
       - ./db/init_db.sql:/docker-entrypoint-initdb.d/init_1.sql
 
+swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - "22251:8080"
+    volumes:
+      - ./swagger:/foo
+    environment:
+      - SWAGGER_JSON=/foo/api_dep.yaml    
+
+go-backend:
+    build: .
+    environment:
+      TZ: "Asia/Seoul"
+    ports:
+      - "22250:22250"
+    volumes:
+     - ./log:/app/log
  

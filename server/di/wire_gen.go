@@ -17,6 +17,9 @@ import (
 	users2 "lifelogger/server/domain/users/model"
 
 	"lifelogger/server/service/users"
+	calendar2 "lifelogger/server/domain/calendar/model"
+
+	"lifelogger/server/service/calendar"
 	"lifelogger/server/service/categories"
 	blocks2 "lifelogger/server/domain/blocks/model"
 	"lifelogger/server/service/blocks"
@@ -59,6 +62,15 @@ func InjectCreateUserService() (users.CreateUserService, func()) {
 	return createUserService, cleanup
 }
 
+
+func InjectCreateCalendarService() (calendar.CreateCalendarService, func()) {
+	context := provideCtx()
+	conn := provideConn(context)
+	tx, cleanup := provideTx(context, conn)
+	calendarRepository := calendar2.NewCalendarRepository(conn, tx, context)
+	createCalendarService := calendar.NewCreateCalendarService(calendarRepository)
+	return createCalendarService, cleanup
+}
 
 // di.go:
 
