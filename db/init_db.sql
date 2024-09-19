@@ -20,6 +20,7 @@ INSERT INTO ADMIN (email,passcode,admin_type,brand_id) VALUES
 ('ahnnn000@gmail.com','$2a$12$cqXwxUhyP5bkcdoz7Tge1.6DgDeN9h4mqfTqMycCdm01K8rsKwbVG','SUPER',NULL);
 
 
+-- 카테고리 별 누적 시간 미포함
 CREATE TABLE Categories (
     id INT NOT NULL AUTO_INCREMENT,
     category_user_id INT,
