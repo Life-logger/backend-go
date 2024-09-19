@@ -33,7 +33,7 @@ func NewUsersRepository(
 func (s usersRepositoryImpl) Save(user User) {
 	sqlStatement := `INSERT INTO Users (user_id, user_name) VALUES (?, ?)`
 
-	_, err := s.tx.ExecContext(s.ctx, sqlStatement, user.UserId(), user.UserEmail(), user.UserName)
+	_, err := s.tx.ExecContext(s.ctx, sqlStatement, user.UserId(), user.UserEmail(), user.UserName())
 	if err != nil {
 		panic(err.Error())
 	}
