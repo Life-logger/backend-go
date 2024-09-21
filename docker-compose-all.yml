@@ -21,14 +21,5 @@ services:
       volumes:
         - ./swagger:/foo
       environment:
-        - SWAGGER_JSON=/foo/api_dep.yaml    
-
-  go-backend:
-      build: .
-      environment:
-        TZ: "Asia/Seoul"
-      ports:
-        - "22250:22250"
-      volumes:
-      - ./log:/app/log
+        - SWAGGER_JSON=/foo/api_dep.yaml
   
