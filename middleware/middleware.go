@@ -18,7 +18,7 @@ func AuthMiddleware() fiber.Handler {
 			if accessToken == "" {
 				// 쿠키에 액세스 토큰이 없으면 로그인 페이지로 리다이렉트
 				log.Println("No access token found")
-				panic("No access token found")
+				panic("No access token found 안녕")
 			}
 
 			tokenGetter := util.NewTokenGetter()

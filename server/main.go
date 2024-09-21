@@ -24,7 +24,8 @@ func main() {
 
 	app := router.Initialize(multiWriter)
 
-	// Start the server on port 3000
-
-	log.Fatal(app.Listen(":22250"))
+	err := app.Listen(":" + "22250")
+	if err != nil {
+		println(err.Error())
+	}
 }

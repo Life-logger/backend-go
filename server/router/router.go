@@ -2,6 +2,7 @@ package router
 
 import (
 	"io"
+	"lifelogger/middleware"
 	"log"
 	"runtime/debug"
 	"time"
@@ -46,7 +47,7 @@ func Initialize(multiWriter io.Writer) *fiber.App {
 	})
 
 	// 미들웨어를 추가
-	//f.Use(middleware.AuthMiddleware())
+	f.Use(middleware.AuthMiddleware())
 
 	// 라우트 그룹 설정
 	groups.NewLoginGroup(f)
