@@ -13,17 +13,15 @@ import (
 	"github.com/google/wire"
 	"lifelogger/server/config"
 	"lifelogger/server/config/domainEvent"
+	blocks2 "lifelogger/server/domain/blocks/model"
+	calendar2 "lifelogger/server/domain/calendar/model"
 	categories2 "lifelogger/server/domain/categories/model"
 	users2 "lifelogger/server/domain/users/model"
-
-	"lifelogger/server/service/users"
-	calendar2 "lifelogger/server/domain/calendar/model"
-
+	"lifelogger/server/service/blocks"
 	"lifelogger/server/service/calendar"
 	"lifelogger/server/service/categories"
-	blocks2 "lifelogger/server/domain/blocks/model"
-	"lifelogger/server/service/blocks"
 	"lifelogger/server/service/hello"
+	"lifelogger/server/service/users"
 	"lifelogger/server/util/mattermost"
 	"runtime/debug"
 )
@@ -49,8 +47,17 @@ func InjectCreateBlockService() (blocks.CreateBlockService, func()) {
 	conn := provideConn(context)
 	tx, cleanup := provideTx(context, conn)
 	blocksRepository := blocks2.NewBlocksRepository(conn, tx, context)
-	createCategoryService := blocks.NewCreateBlockService(blocksRepository)
-	return createCategoryService, cleanup
+	createBlockService := blocks.NewCreateBlockService(blocksRepository)
+	return createBlockService, cleanup
+}
+
+func InjectCreateCalendarService() (calendar.CreateCalendarService, func()) {
+	context := provideCtx()
+	conn := provideConn(context)
+	tx, cleanup := provideTx(context, conn)
+	calendarRepository := calendar2.NewCalendarRepository(conn, tx, context)
+	createCalendarService := calendar.NewCreateCalendarService(calendarRepository)
+	return createCalendarService, cleanup
 }
 
 func InjectCreateUserService() (users.CreateUserService, func()) {
@@ -60,16 +67,6 @@ func InjectCreateUserService() (users.CreateUserService, func()) {
 	usersRepository := users2.NewUsersRepository(conn, tx, context)
 	createUserService := users.NewCreateUserService(usersRepository)
 	return createUserService, cleanup
-}
-
-
-func InjectCreateCalendarService() (calendar.CreateCalendarService, func()) {
-	context := provideCtx()
-	conn := provideConn(context)
-	tx, cleanup := provideTx(context, conn)
-	calendarRepository := calendar2.NewCalendarRepository(conn, tx, context)
-	createCalendarService := calendar.NewCreateCalendarService(calendarRepository)
-	return createCalendarService, cleanup
 }
 
 // di.go:

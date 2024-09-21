@@ -11,10 +11,16 @@ import (
 
 	"github.com/google/wire"
 
-	helloService "lifelogger/server/service/hello"
-
-	categoriesModel "lifelogger/server/domain/categories/model"
+	blockService "lifelogger/server/service/blocks"
+	calendarService "lifelogger/server/service/calendar"
 	categoryService "lifelogger/server/service/categories"
+	helloService "lifelogger/server/service/hello"
+	userService "lifelogger/server/service/users"
+
+	blockModel "lifelogger/server/domain/blocks/model"
+	calendarModel "lifelogger/server/domain/calendar/model"
+	categoriesModel "lifelogger/server/domain/categories/model"
+	userModel "lifelogger/server/domain/users/model"
 
 	"lifelogger/server/config"
 	"lifelogger/server/config/domainEvent"
@@ -109,8 +115,8 @@ func InjectCreateCategoryService() (categoryService.CreateCategoryService, func(
 func InjectCreateBlockService() (blockService.CreateBlockService, func()) {
 	panic(wire.Build(
 		superSet,
-		categoriesModel.NewCategoriesRepository,
-		categoryService.NewCreateCategoryService,
+		blockModel.NewBlocksRepository,
+		blockService.NewCreateBlockService,
 	))
 }
 
@@ -125,7 +131,7 @@ func InjectCreateCalendarService() (calendarService.CreateCalendarService, func(
 func InjectCreateUserService() (userService.CreateUserService, func()) {
 	panic(wire.Build(
 		superSet,
-		userModel.NewUserRepository,
+		userModel.NewUsersRepository,
 		userService.NewCreateUserService,
 	))
 }
