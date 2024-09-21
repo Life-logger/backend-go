@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"lifelogger/server/config"
 	"log"
 	"os"
 
@@ -15,7 +16,7 @@ func main() {
 		panic("empty .env " + err.Error())
 	}
 
-	//config.InitializeDB()
+	config.InitializeDB()
 
 	multiWriter := io.MultiWriter(os.Stdout)
 	log.SetOutput(multiWriter)
