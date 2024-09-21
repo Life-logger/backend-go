@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"lifelogger/server/di"
 	"lifelogger/server/domain/users/dto"
 	"lifelogger/server/util/httpHelper"
@@ -18,8 +17,6 @@ func (a *UserController) CreateUser(c *fiber.Ctx) error {
 	createUserService, cleanup := di.InjectCreateUserService()
 	defer cleanup()
 
-	fmt.Println("!!!!!!!!!!!!!!!!!!!!!")
 	userDto := createUserService.CreateUser(*reqDto)
-	fmt.Println(userDto)
 	return c.Status(200).JSON(userDto)
 }

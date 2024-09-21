@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"lifelogger/server/domain/users/dto"
 	model "lifelogger/server/domain/users/model"
 )
@@ -23,9 +22,7 @@ func NewCreateUserService(UserRepository model.UsersRepository) CreateUserServic
 }
 
 func (s *createUserServiceImpl) CreateUser(reqDto dto.CreateUserReqDto) dto.UserDto {
-	fmt.Println(reqDto, "reqdto")
 	user := model.NewUser(reqDto.UserEmail, reqDto.UserName)
 	s.UserRepository.Save(user)
-	fmt.Println(user, "user")
 	return user.ToDto()
 }
