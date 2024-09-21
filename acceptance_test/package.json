@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "cy-spok": "^1.6.2",
+    "cypress": "^13.12.0",
+    "inherits": "^2.0.4"
+  }
+}

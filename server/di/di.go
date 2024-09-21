@@ -121,3 +121,11 @@ func InjectCreateCalendarService() (calendarService.CreateCalendarService, func(
 		calendarService.NewCreateCalendarService,
 	))
 }
+
+func InjectCreateUserService() (userService.CreateUserService, func()) {
+	panic(wire.Build(
+		superSet,
+		userModel.NewUserRepository,
+		userService.NewCreateUserService,
+	))
+}

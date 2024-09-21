@@ -10,5 +10,5 @@ func NewUserGroup(f *fiber.App) {
 	userController := controller.UserController{}
 
 	group := f.Group("/user")
-	group.Get("", userController.CreateUser)
+	group.Post("", userController.CreateUser)
 }

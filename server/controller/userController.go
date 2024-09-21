@@ -18,5 +18,5 @@ func (a *UserController) CreateUser(c *fiber.Ctx) error {
 	defer cleanup()
 	createUserService.CreateUser(*reqDto)
 
-	return c.SendStatus(200)
+	return c.SendStatus(200).JSON(createUserService)
 }
