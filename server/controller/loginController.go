@@ -16,7 +16,7 @@ func (a *LoginController) Login(c *fiber.Ctx) error {
 	accessToken, refreshToken := tokenGetter.GetAccessToken(code) // Access Token, Refresh Token 가져오기
 	nickname, email, err := tokenGetter.GetUserInfo(accessToken)  // Nickname 가져오기
 	if err != nil {
-		return c.Status(fiber.StatusInternalServerError).SendString("Faild to retrieve user info")
+		return c.Status(fiber.StatusInternalServerError).SendString("Failed to retrieve user info")
 	}
 	//
 	// Users 테이블에 사용자 정보 저장
